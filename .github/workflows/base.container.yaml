@@ -2,6 +2,9 @@ name: ⛰ base container
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 defaults:
   run:
