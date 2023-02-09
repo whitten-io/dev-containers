@@ -1,0 +1,7 @@
+format: json
+exit-code: 1
+severity: CRITICAL
+
+# Same as '--ignorefile'
+# Default is '.trivyignore'
+ignorefile: .trivyignore
