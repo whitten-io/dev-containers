@@ -35,7 +35,7 @@ jobs:
           file: ./containers/base/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nexus:latest
-       - 
+      - 
         name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
