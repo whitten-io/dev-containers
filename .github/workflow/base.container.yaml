@@ -2,8 +2,6 @@ name: ⛰ base container
 
 on:
   push:
-    paths:
-      - "./containers/base/*"
     branches:
       - "main"
       - "release/**"
