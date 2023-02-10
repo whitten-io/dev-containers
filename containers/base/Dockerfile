@@ -2,6 +2,21 @@
 ARG VARIANT=16-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}
 
+#
+# support vscode
+RUN mkdir -p /home/vscode/.vscode-server/extensions \
+    /home/vscode/.vscode-server-insiders/extensions \
+    && chown -R vscode \
+    /home/vscode/.vscode-server \
+    /home/vscode/.vscode-server-insiders
+
+COPY ./install-powershell.sh /home/vscode/install-powershell.sh
+RUN /home/vscode/install-powershell.sh
+
+COPY ./install-hashicorp.ps1 /home/vscode/install-hashicorp.ps1
+RUN /home/vscode/install-hashicorp.ps1 waypoint
+RUN /home/vscode/install-hashicorp.ps1 vault
+
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
