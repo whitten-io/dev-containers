@@ -2,9 +2,13 @@ name: ⛰ base container
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - "./containers/base"
   pull_request:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - "./containers/base"
 
 defaults:
   run:
@@ -15,33 +19,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      -
-        name: Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./containers/base/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nexus:latest
-      - 
-        name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nexus:latest'
-          format: 'table'
-          exit-code: '1'
+          image-ref: "docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nexus:latest"
+          format: "table"
+          exit-code: "1"
           ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"

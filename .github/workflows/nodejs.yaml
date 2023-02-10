@@ -3,8 +3,12 @@ name: ⛰ NodeJS Dev Container
 on:
   push:
     branches: [main]
+    paths:
+      - "./containers/nodejs"
   pull_request:
     branches: [main]
+    paths:
+      - "./containers/nodejs"
 
 defaults:
   run:

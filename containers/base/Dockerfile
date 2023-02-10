@@ -10,7 +10,7 @@ RUN mkdir -p /home/vscode/.vscode-server/extensions \
     /home/vscode/.vscode-server \
     /home/vscode/.vscode-server-insiders
 
-COPY install-powershell.sh /home/vscode/install-powershell.sh
+COPY .install-powershell.sh /home/vscode/install-powershell.sh
 RUN /home/vscode/install-powershell.sh
 
 COPY install-hashicorp.ps1 /home/vscode/install-hashicorp.ps1
